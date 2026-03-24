@@ -1,0 +1,48 @@
+const readline = require("readline");
+
+const rl = readline.createInterface({
+  input: process.stdin,
+  output: process.stdout,
+});
+
+function question(prompt) {
+  return new Promise((resolve) => rl.question(prompt, resolve));
+}
+
+async function checkRegistration() {
+  console.log("=============================================");
+  console.log("   STUDENT REGISTRATION STATUS CHECKER");
+  console.log("=============================================");
+
+  const name = (await question("\nEnter student name: ")).trim();
+
+  let units;
+  while (true) {
+    const input = (await question("Enter number of registered units: ")).trim();
+    units = parseInt(input, 10);
+    if (isNaN(units) || !Number.isInteger(units)) {
+      console.log("Invalid input. Please enter a whole number.");
+      continue;
+    }
+    if (units < 0) {
+      console.log("Units cannot be negative. Please try again.");
+      continue;
+    }
+    break;
+  }
+
+  const status =
+    units > 7 ? "Overload - Approval Required" : "Registration Accepted";
+
+  console.log("\n=============================================");
+  console.log("           REGISTRATION SUMMARY");
+  console.log("=============================================");
+  console.log(`  Student Name : ${name}`);
+  console.log(`  Units        : ${units}`);
+  console.log(`  Status       : ${status}`);
+  console.log("=============================================");
+
+  rl.close();
+}
+
+checkRegistration();
