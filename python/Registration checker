@@ -1,0 +1,30 @@
+def check_registration():
+    print("=" * 45)
+    print("   STUDENT REGISTRATION STATUS CHECKER")
+    print("=" * 45)
+
+    name = input("\nEnter student name: ").strip()
+
+    while True:
+        try:
+            units = int(input("Enter number of registered units: "))
+            if units < 0:
+                print("Units cannot be negative. Please try again.")
+                continue
+            break
+        except ValueError:
+            print("Invalid input. Please enter a whole number.")
+
+    status = "Overload - Approval Required" if units > 7 else "Registration Accepted"
+
+    print("\n" + "=" * 45)
+    print("           REGISTRATION SUMMARY")
+    print("=" * 45)
+    print(f"  Student Name : {name}")
+    print(f"  Units        : {units}")
+    print(f"  Status       : {status}")
+    print("=" * 45)
+
+
+if __name__ == "__main__":
+    check_registration()
